@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 app.use(express.json());
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors({ origin: 'https://med-folio.vercel.app/' }));
 
 mongoose.connect('mongodb+srv://harish130505:easypass@harish.tcjpp.mongodb.net/med-records');
 const con = mongoose.connection
