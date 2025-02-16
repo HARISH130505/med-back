@@ -6,7 +6,10 @@ const multer = require('multer');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-app.use(cors({ origin: 'https://med-folio.vercel.app' }));
+app.use(cors({
+    origin: 'https://med-folio.vercel.app',
+    credentials: true
+}));
 
 app.use(express.json());
 
