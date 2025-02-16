@@ -45,6 +45,24 @@ app.get('/', async (req, res) => {
         res.status(500).send(err);
     }
 });
+app.post('/',async(req,res)=>{
+    try{
+        const record1 = new records({
+            dn: req.body.dn,
+            hn: req.body.hn,
+            diag: req.body.diag,
+        })
+        const savedRecord = await record1.save();
+
+        res.status(200).json({
+            message: 'Record saved successfully',
+            record: savedRecord
+        });
+    } catch (error) {
+        console.error("Upload error:", error);
+        res.status(500).json({ message: 'Save failed', error: error.message });
+    }
+})
 
 app.post('/uploads', upload.single("file"), async (req, res) => {
     try {
@@ -54,14 +72,11 @@ app.post('/uploads', upload.single("file"), async (req, res) => {
 
         console.log('Uploaded File:', req.file);
 
-        const record = new records({
-            dn: req.body.dn,
-            hn: req.body.hn,
-            diag: req.body.diag,
+        const record2 = new records({
             file: req.file.filename
         });
 
-        const savedRecord = await record.save();
+        const savedRecord = await record2.save();
 
         res.status(200).json({
             message: 'File uploaded and record saved successfully',
